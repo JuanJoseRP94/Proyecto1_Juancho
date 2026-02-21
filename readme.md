@@ -7,9 +7,9 @@
 [Link del dataset elegido:] (https://www.kaggle.com/datasets/bobbyscience/league-of-legends-diamond-ranked-games-10-min/data)
 Nº Filas: 4.527.990.640
 Nº Columnas: 40
-Variables clave: 
-**Tótem guardián**: Un objeto que un jugador puede colocar en el mapa para revelar el área cercana.
-**Esbirros**: PNJ que pertenecen a ambos equipos. Otorgan oro al ser eliminados por jugadores.
+Variables clave:  
+**Tótem guardián**: Un objeto que un jugador puede colocar en el mapa para revelar el área cercana.  
+**Esbirros**: PNJ que pertenecen a ambos equipos. Otorgan oro al ser eliminados por jugadores.  
 **Esbirros de la jungla**: PNJ que no pertenecen a ningún equipo. Otorgan oro y beneficios al ser eliminados por jugadores.
 **Monstruos de élite**: Monstruos con altos puntos de vida/daño que otorgan una gran bonificación (oro/EXP/estadísticas) al ser eliminados por un equipo.
 **Dragones**: Monstruo de élite que otorga una bonificación de equipo al ser eliminado. El cuarto dragón eliminado por un equipo otorga una enorme bonificación de estadísticas. El quinto dragón (Dragón Anciano) ofrece una gran ventaja al equipo.
