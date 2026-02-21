@@ -1,5 +1,7 @@
 import matplotlib.pyplot as plt
 import seaborn as sns
+import numpy as np
+from mpl_toolkits.mplot3d import Axes3D
 
 
 def plot_gold_distribution(df):
@@ -85,4 +87,95 @@ def plot_team_comparison(df, blue_col, red_col, metric_name, aggfunc='mean'):
     plt.title(f"Comparación de {metric_name}: Azul vs Rojo")
     plt.ylabel(metric_name)
     plt.tight_layout()
+    plt.show()
+
+def plot_fill_between_diff(df, diff_column, title):
+    """Diferencia entre diferentes columnas en varias partidas"""
+
+    cumulative = df[diff_column].cumsum()
+
+    plt.figure()
+    x = np.arange(len(cumulative))
+
+    plt.fill_between( # Esto determina el color de la gráfica
+        # si está en positivo se colorea en azul, si es negativo en rojo.
+        x,
+        cumulative,
+        where=(cumulative >= 0),
+        color='blue',
+        alpha=0.6
+    )
+    plt.fill_between(
+        x,
+        cumulative,
+        where=(cumulative < 0),
+        color='red', # Aqui colocamos color rojo cuando domina este equipo.
+        alpha=0.6
+    )
+
+    plt.title(f'Diferencia acumulada de {title}')
+    plt.xlabel('Partidas')
+    plt.ylabel('Diferencia acumulada')
+    plt.plot([], [], color='blue', label='Ventaja Blue')
+    plt.plot([], [], color='red', label='Ventaja Red')
+    plt.legend()
+    plt.show()
+
+
+def plot_objectives_3d(df):
+    """Comparación en 3D de diferentes objetivos en la partida y su impacto en ella."""
+    fig = plt.figure(figsize=(10,6))
+    ax = fig.add_subplot(projection='3d')
+
+    objectives = ['Dragons', 'Heralds', 'Elite Monsters']
+    blue_means = [
+        df['blueDragons'].mean(),
+        df['blueHeralds'].mean(),
+        df['blueEliteMonsters'].mean()
+    ]
+    red_means = [
+        df['redDragons'].mean(),
+        df['redHeralds'].mean(),
+        df['redEliteMonsters'].mean()
+    ]
+
+    xpos = np.arange(len(objectives))
+    zpos = np.zeros(len(objectives))
+
+    dx = dy = 0.3  # reduce tamaño para que no se solapen ya que se tapan unas a otras
+
+    # Barras azules un poco adelantadas en y
+    ypos_blue = np.zeros(len(objectives))
+    ax.bar3d(xpos, ypos_blue, zpos, dx, dy, blue_means, color='blue', alpha=0.7, label='Blue')
+
+    # Barras rojas desplazadas para que no se tapen
+    ypos_red = ypos_blue + dy + 0.05  # pequeño offset
+    ax.bar3d(xpos, ypos_red, zpos, dx, dy, red_means, color='red', alpha=0.7, label='Red')
+
+    # Ajuste ticks
+    ax.set_xticks(xpos + dx/2)
+    ax.set_xticklabels(objectives)
+    ax.set_yticks([0.0, 0.45])  # aproximado según desplazamiento
+    ax.set_yticklabels(['Blue', 'Red'])
+
+    ax.set_zlabel('Media')
+    ax.set_title('Comparación 3D de objetivos mayores')
+
+    # Rotar vista para ver mejor las barras
+    ax.view_init(elev=23, azim=60)
+
+    plt.show()
+
+def plot_dominance_score(df):
+    """Dominancia promedio por equipo"""
+
+    blue_mean = df['blueDominance'].mean()
+    red_mean = df['redDominance'].mean()
+
+    plt.figure()
+    plt.bar(['Blue', 'Red'], [blue_mean, red_mean])
+
+    plt.title('Dominancia promedio por equipo')
+    plt.ylabel('Score de dominancia')
+
     plt.show()

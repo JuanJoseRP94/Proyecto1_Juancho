@@ -10,24 +10,24 @@ Nº Columnas: 40
 Variables clave:  
 **Tótem guardián**: Un objeto que un jugador puede colocar en el mapa para revelar el área cercana.  
 **Esbirros**: PNJ que pertenecen a ambos equipos. Otorgan oro al ser eliminados por jugadores.  
-**Esbirros de la jungla**: PNJ que no pertenecen a ningún equipo. Otorgan oro y beneficios al ser eliminados por jugadores.
-**Monstruos de élite**: Monstruos con altos puntos de vida/daño que otorgan una gran bonificación (oro/EXP/estadísticas) al ser eliminados por un equipo.
-**Dragones**: Monstruo de élite que otorga una bonificación de equipo al ser eliminado. El cuarto dragón eliminado por un equipo otorga una enorme bonificación de estadísticas. El quinto dragón (Dragón Anciano) ofrece una gran ventaja al equipo.
-**Heraldo**: Monstruo de élite que otorga bonificación de estadísticas al ser eliminado por el jugador.
-**Torres**: Estructuras que debes destruir para alcanzar el Nexo enemigo. Otorgan oro.
-**Nivel**: Campeón. Empieza en 1. Máximo 18.
+**Esbirros de la jungla**: PNJ que no pertenecen a ningún equipo. Otorgan oro y beneficios al ser eliminados por jugadores.  
+**Monstruos de élite**: Monstruos con altos puntos de vida/daño que otorgan una gran bonificación (oro/EXP/estadísticas) al ser eliminados por un equipo.  
+**Dragones**: Monstruo de élite que otorga una bonificación de equipo al ser eliminado. El cuarto dragón eliminado por un equipo otorga una enorme bonificación de estadísticas. El quinto dragón (Dragón Anciano) ofrece una gran ventaja al equipo.  
+**Heraldo**: Monstruo de élite que otorga bonificación de estadísticas al ser eliminado por el jugador.  
+**Torres**: Estructuras que debes destruir para alcanzar el Nexo enemigo. Otorgan oro.  
+**Nivel**: Campeón. Empieza en 1. Máximo 18.  
 
 ---
 
 **Preguntas interesantes:**
 
-**¿El equipo con más oro al minuto 10 tiene mayor probabilidad de ganar?** (histograma o boxplot)
+**¿Cuanto oro se consigue de promedio en los 10 primeros minutos?** (histograma o boxplot)
 
-**¿Qué pesa más: asesinatos o objetivos (dragones/heraldo) / ¿Es más importante conseguir kills o controlar objetivos neutrales??**(Barplot / Lineplot)
+**¿Tener más oro implica mayor probabilidad de victoria? O ¿El equipo ganador suele tener más oro que el perdedor?**(Barplot / Lineplot)
 
-**¿El equipo que consigue el primer dragón gana más partidas?**(Barplot)
+**¿Tener más asesinatos implica mayor oro en la partida?**(Barplot)
 
-**¿Qué variable tiene mayor correlación con la victoria?**(Heatmap)
+**¿Qué equipo suele hacer más objetivos? ¿Y cuales?**(Heatmap)
 
 ### Problemas dataset y reparaciones
 
@@ -35,7 +35,7 @@ Variables clave:
 
 **2º: Limpieza del dataset ->** Al tener sucio el dataset tuve que crear métodos para limpiarlos, y eso hice en el archivo "cleaning.py" eliminando los valores nulos y los demás problemas que llevaba el dataset.
 
-**3º El dataset mostraba solo victorias del equipo azul(si perdia se consideraba victoria de equipo rojo) pero eso hacía muy dificil comparar ambos equipos ->** Decidí crear un features para añadir la columna "redWins" y asi poder comparar mejor a ambos equipos.
+**3º El dataset mostraba solo victorias del equipo azul(si perdia se consideraba victoria de equipo rojo) pero eso hacía muy dificil comparar ambos equipos ->** Decidí crear un features para añadir la columna "redWins", además de otras columnas adicionales como "dragonDiff", "eliteMonstersDiff" etc y asi poder comparar mejor a ambos equipos.
 
 ### Pipeline
 data/raw/        → Datos originales
@@ -46,11 +46,11 @@ README.md        → Explicación del proceso
 
 ### Hallazgos
 
-- **Insight 1:** La diferencia de oro es el factor más determinante en la victoria del equipo azul (ver Gráfico 2).
+- **Insight 1:** *Se obtiene con más frecuencia un término medio de oro entre 15000 y 17000*(ver Gráfico 1).
 
-- **Insight 2:** Los dragones tienen impacto positivo, pero secundario frente a la ventaja económica (ver Gráfico 3).
+- **Insight 2:** *A mayor oro -> Mayor probabilidad de victoria* (ver Gráfico 2).
 
-- **Insight 3:** Las kills no son suficientes para asegurar la victoria si no generan ventaja estructural (ver Gráfico 4).
+- **Insight 3:** *El equipo rojo suele tener una mejor puntuación de objetivos frente a azul, pero la probabilidad de victoria de ambos equipos está muy pareja* (ver los últimos 5 gráficos).
 
 ### Estructura del proyecto
 
