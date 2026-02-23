@@ -2,7 +2,7 @@ import os
 import sys
 
 # Permite importar desde src
-sys.path.append(os.path.abspath("."))
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 from src.io import load_data
 from src.features import (
@@ -13,10 +13,9 @@ from src.features import (
 from src.viz import (
     plot_team_comparison,
     plot_fill_between_diff,
-    plot_3d_objectives,
+    plot_objectives_3d,   # <-- nombre correcto
     plot_dominance_score,
 )
-
 
 def main():
 
@@ -30,7 +29,6 @@ def main():
     print(f"Shape: {df.shape}")
 
     # COMPARACIONES BÁSICAS
-
     plot_team_comparison(
         df,
         'blueDragons',
@@ -55,13 +53,15 @@ def main():
         'sum'
     )
 
-    # Diferencia acumulada de kills
+    # DIFERENCIAS ACUMULADAS
     plot_fill_between_diff(df, 'killDiff', 'Kills')
+    plot_fill_between_diff(df, 'dragonDiff', 'Dragones')
+    plot_fill_between_diff(df, 'eliteMonstersDiff', 'Monstruos de élite')
 
-    # Objetivos mayores en 3D
-    plot_3d_objectives(df)
+    # OBJETIVOS EN 3D
+    plot_objectives_3d(df)
 
-    # Score de dominancia
+    # Gráfico de dominancia por equipos
     plot_dominance_score(df)
 
 
